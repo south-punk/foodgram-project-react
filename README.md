@@ -1,5 +1,20 @@
 # Foodgram, «Продуктовый помощник». Дипломный проект.
 ## Свой Чек-лист для проверки (по redoc):
+### Пользователи:
+:heavy_check_mark: /api/users/  
+:heavy_check_mark: /api/users/{id}/  
+:heavy_check_mark: /api/users/me/  
+:heavy_check_mark: /api/users/set_password/  
+:heavy_check_mark: /api/auth/token/login/
+:heavy_check_mark: /api/auth/token/logout/
+:o: Список пользователей :warning: *не добавлено поле is_subscribed* :warning:  
+:heavy_check_mark:  Регистрация пользователя  
+:o: Профиль пользователя  *не добавлено поле is_subscribed* :warning:  
+:o: Текущий пользователь  *не добавлено поле is_subscribed* :warning:  
+:o: Изменение пароля :warning: *код 401 - другое описание* :warning:  
+:heavy_check_mark: Получить токен авторизации  
+:o: Удаление токена авторизации :warning: *код 401 - другое описание* :warning:
+
 ### Теги
 :heavy_check_mark: /api/tags/  
 :o: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
@@ -11,9 +26,6 @@
 ### Рецепты
 :x: Список рецептов:  
     :heavy_check_mark: api/recipes/  
-    :x: паджинация  
-    :x: фильтрация  
-    :x: лимиты  
     :x: список избранного  
     :x: список покупок  
     :x: автор  
@@ -23,8 +35,10 @@
 :x: Список покупок  
 :x: Избранное  
 :x: Подписки  
-:x: Пользователи  
-
+:x: паджинация  
+:x: фильтрация  
+:x: лимиты  
+:x: пермишны
 
 ## Чек-лист для проверки с Яндекса:
 ### Функциональность проекта

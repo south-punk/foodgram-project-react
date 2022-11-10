@@ -24,13 +24,15 @@ class RecipeViewSet(viewsets.ModelViewSet):
         return PostRecipeSerializer
 
 
-class TagViewSet(viewsets.ReadOnlyModelViewSet):
+class TagViewSet(viewsets.ModelViewSet):
+# class TagViewSet(viewsets.ReadOnlyModelViewSet):
     """ Представление тегов."""
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
 
-class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
+class IngredientViewSet(viewsets.ModelViewSet):
+# class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
     """ Представление ингредиентов."""
 
     serializer_class = IngredientSerializer
