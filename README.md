@@ -5,8 +5,8 @@
 :heavy_check_mark: /api/users/{id}/  
 :heavy_check_mark: /api/users/me/  
 :heavy_check_mark: /api/users/set_password/  
-:heavy_check_mark: /api/auth/token/login/
-:heavy_check_mark: /api/auth/token/logout/
+:heavy_check_mark: /api/auth/token/login/  
+:heavy_check_mark: /api/auth/token/logout/  
 :o: Список пользователей :warning: *не добавлено поле is_subscribed* :warning:  
 :heavy_check_mark:  Регистрация пользователя  
 :o: Профиль пользователя  *не добавлено поле is_subscribed* :warning:  
