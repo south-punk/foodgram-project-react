@@ -9,8 +9,8 @@
 :heavy_check_mark: /api/auth/token/logout/  
 :o: Список пользователей :warning: *не добавлено поле is_subscribed* :warning:  
 :heavy_check_mark:  Регистрация пользователя  
-:o: Профиль пользователя  *не добавлено поле is_subscribed* :warning:  
-:o: Текущий пользователь  *не добавлено поле is_subscribed* :warning:  
+:o: Профиль пользователя :warning: *не добавлено поле is_subscribed* :warning:  
+:o: Текущий пользователь :warning: *не добавлено поле is_subscribed* :warning:  
 :o: Изменение пароля :warning: *код 401 - другое описание* :warning:  
 :heavy_check_mark: Получить токен авторизации  
 :o: Удаление токена авторизации :warning: *код 401 - другое описание* :warning:
