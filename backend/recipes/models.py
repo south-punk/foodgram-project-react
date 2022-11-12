@@ -1,7 +1,10 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.contrib.auth import get_user_model
 
 MIN = 1
+
+User = get_user_model()
 
 
 class Ingredient(models.Model):
@@ -38,7 +41,12 @@ class Tag(models.Model):
 
 class Recipe(models.Model):
     """ Модель рецептов."""
-
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='recipes',
+        verbose_name='Автор рецепта'
+    )
     name = models.CharField(max_length=200, verbose_name='Название')
     text = models.TextField(verbose_name='Описание')
     cooking_time = models.IntegerField(
@@ -93,3 +101,29 @@ class IngredientRecipe(models.Model):
 
     def __str__(self):
         return f'{self.recipe} - {self.ingredient} {self.amount}'
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='follower',
+        verbose_name='Подписчик'
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='following',
+        verbose_name='Автор рецептов'
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'author'],
+                name='unique_user_author'
+            )
+        ]
+
+    def __str__(self):
+        return f'подписка пользователя {self.user} на {self.author}'

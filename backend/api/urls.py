@@ -3,17 +3,24 @@ from django.urls import include, path
 from .views import (
     IngredientViewSet,
     RecipeViewSet,
-    TagViewSet
+    TagViewSet,
+    SubscribeCreateDestroyView,
+    SubscribeListView
 )
-
 
 router = DefaultRouter()
 
-router.register('ingredients', IngredientViewSet)
-router.register('recipes', RecipeViewSet)
-router.register('tags', TagViewSet)
+router.register('ingredients', IngredientViewSet, basename='ingredients')
+router.register('recipes', RecipeViewSet, basename='recipes')
+router.register('tags', TagViewSet, basename='tags')
 
 urlpatterns = [
+    path('users/<int:id>/subscribe/',
+         SubscribeCreateDestroyView.as_view(),
+         name='subscribe'),
+    path('users/subscriptions/',
+         SubscribeListView.as_view(),
+         name='subscriptions'),
     path('', include(router.urls)),
     path('', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),

@@ -11,18 +11,15 @@
 :heavy_check_mark:  Регистрация пользователя  
 :o: Профиль пользователя :warning: *не добавлено поле is_subscribed* :warning:  
 :o: Текущий пользователь :warning: *не добавлено поле is_subscribed* :warning:  
-:o: Изменение пароля :warning: *код 401 - другое описание* :warning:  
+:o: Изменение пароля :interrobang: *код 401 - другое описание* :interrobang:  
 :heavy_check_mark: Получить токен авторизации  
-:o: Удаление токена авторизации :warning: *код 401 - другое описание* :warning:
+:o: Удаление токена авторизации :interrobang: *код 401 - другое описание* :interrobang:  
 
 ### Теги
 :heavy_check_mark: /api/tags/  
 :o: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
 :o: Получение тега - *добавить валидатор на hex код (регулярное выражение)*  
-### Ингридиенты
-:heavy_check_mark: /api/ingredients/  
-:heavy_check_mark: Список ингридиентов  
-:heavy_check_mark: Получение ингридиентов  
+
 ### Рецепты
 :x: Список рецептов:  
     :heavy_check_mark: api/recipes/  
@@ -32,9 +29,22 @@
     :heavy_check_mark: теги  
     :heavy_check_mark: игредниеты  
     :x: фото  
-:x: Список покупок  
-:x: Избранное  
-:x: Подписки  
+### Список покупок
+:x:
+### Избранное
+:x:
+### Подписки
+:heavy_check_mark: api/users/subscriptions/  
+:heavy_check_mark: api/users/{id}/subscribe/  
+:o: Мои подписки :warning: *не добавлены поля recipes и recipes_count* :warning:  
+:o: Подписаться на пользователя :warning: *не добавлены поля recipes и recipes_count* :warning:  
+:heavy_check_mark: Отписаться от пользователя  
+### Ингридиенты
+:heavy_check_mark: /api/ingredients/  
+:heavy_check_mark: Список ингридиентов  
+:heavy_check_mark: Получение ингридиентов  
+
+
 :x: паджинация  
 :x: фильтрация  
 :x: лимиты  
