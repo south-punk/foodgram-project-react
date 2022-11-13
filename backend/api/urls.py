@@ -1,6 +1,7 @@
 from rest_framework.routers import DefaultRouter
 from django.urls import include, path
 from .views import (
+    FavoriteCreateDestroyView,
     IngredientViewSet,
     RecipeViewSet,
     TagViewSet,
@@ -15,6 +16,9 @@ router.register('recipes', RecipeViewSet, basename='recipes')
 router.register('tags', TagViewSet, basename='tags')
 
 urlpatterns = [
+    path('recipes/<int:id>/favorite/',
+         FavoriteCreateDestroyView.as_view(),
+         name='favorite'),
     path('users/<int:id>/subscribe/',
          SubscribeCreateDestroyView.as_view(),
          name='subscribe'),

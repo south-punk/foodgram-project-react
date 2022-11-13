@@ -7,18 +7,18 @@
 :heavy_check_mark: /api/users/set_password/  
 :heavy_check_mark: /api/auth/token/login/  
 :heavy_check_mark: /api/auth/token/logout/  
-:o: Список пользователей :warning: *не добавлено поле is_subscribed* :warning:  
+:white_circle: Список пользователей :warning: *не добавлено поле is_subscribed* :warning:  
 :heavy_check_mark:  Регистрация пользователя  
-:o: Профиль пользователя :warning: *не добавлено поле is_subscribed* :warning:  
-:o: Текущий пользователь :warning: *не добавлено поле is_subscribed* :warning:  
-:o: Изменение пароля :interrobang: *код 401 - другое описание* :interrobang:  
+:white_circle: Профиль пользователя :warning: *не добавлено поле is_subscribed* :warning:  
+:white_circle: Текущий пользователь :warning: *не добавлено поле is_subscribed* :warning:  
+:white_circle: Изменение пароля :interrobang: *код 401 - другое описание* :interrobang:  
 :heavy_check_mark: Получить токен авторизации  
-:o: Удаление токена авторизации :interrobang: *код 401 - другое описание* :interrobang:  
+:white_circle: Удаление токена авторизации :interrobang: *код 401 - другое описание* :interrobang:  
 
 ### Теги
 :heavy_check_mark: /api/tags/  
-:o: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
-:o: Получение тега - *добавить валидатор на hex код (регулярное выражение)*  
+:white_circle: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
+:white_circle: Получение тега - *добавить валидатор на hex код (регулярное выражение)*  
 
 ### Рецепты
 :heavy_check_mark: GET api/recipes/  
@@ -35,11 +35,14 @@
 :heavy_check_mark: название
 :x: фото  
 :heavy_check_mark: описание  
-:heavy_check_mark: время прриготовления  
+:heavy_check_mark: время приготовления  
 ### Список покупок
 :x:
 ### Избранное
-:x:
+:heavy_check_mark: POST api/users/{id}/favorite/  
+:heavy_check_mark: DEL api/users/{id}/favorite/  
+:white_circle: Добавить рецепт в избранное  :warning: *Можно ли добавлять свои же рецепты в свое избранное?* :warning:
+:heavy_check_mark: Удалить рецепт из избранного
 ### Подписки
 :heavy_check_mark: api/users/subscriptions/  
 :heavy_check_mark: api/users/{id}/subscribe/  

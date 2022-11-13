@@ -2,6 +2,7 @@ from djoser.serializers import UserCreateSerializer, UserSerializer
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from recipes.models import (
+    Favorite,
     Ingredient,
     IngredientRecipe,
     Recipe,
@@ -212,3 +213,22 @@ class SubscribeCreateDestroySerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         return SubscribeListSerializer(instance.author,
                                        context=self.context).data
+
+
+class FavoriteCreateDestroySerializer(serializers.ModelSerializer):
+    """Сериализатор для избранного."""
+
+    class Meta:
+        model = Favorite
+        fields = ['user', 'recipe']
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Favorite.objects.all(),
+                fields=['user', 'recipe'],
+                message='Рецепт уже добавлен в список избранного'
+            )
+        ]
+
+    def to_representation(self, instance):
+        return RecipeListSubscribeSerializer(instance.recipe,
+                                             context=self.context).data

@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 from .serializers import (
+    FavoriteCreateDestroySerializer,
     IngredientSerializer,
     RecipeCreateSerializer,
     RecipeListSerializer,
@@ -8,6 +9,7 @@ from .serializers import (
     TagSerializer
 )
 from recipes.models import (
+    Favorite,
     Ingredient,
     Recipe,
     Subscription,
@@ -88,5 +90,31 @@ class SubscribeCreateDestroyView(APIView):
                                                 author=author)
         if subscribe.exists():
             subscribe.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class FavoriteCreateDestroyView(APIView):
+
+    def post(self, request, id):
+        serializer = FavoriteCreateDestroySerializer(
+            data={
+                'user': request.user.id,
+                'recipe': id
+                },
+            context={'request': request}
+        )
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id):
+        recipe = get_object_or_404(Recipe, id=id)
+        favorite = Favorite.objects.filter(user=request.user.id,
+                                           recipe=recipe)
+        if favorite.exists():
+            favorite.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
