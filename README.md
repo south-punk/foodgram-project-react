@@ -1,33 +1,25 @@
 # Foodgram, «Продуктовый помощник». Дипломный проект.
 ## Свой Чек-лист для проверки (по redoc):
-</b></details>
-<details>
-<summary> Пользователи </summary><br><b>
-:heavy_check_mark: /api/users/  
-:heavy_check_mark: /api/users/{id}/  
-:heavy_check_mark: /api/users/me/  
-:heavy_check_mark: /api/users/set_password/  
-:heavy_check_mark: /api/auth/token/login/  
-:heavy_check_mark: /api/auth/token/logout/  
-:o: Список пользователей :warning: *не добавлено поле is_subscribed* :warning:  
-:heavy_check_mark:  Регистрация пользователя  
-:o: Профиль пользователя :warning: *не добавлено поле is_subscribed* :warning:  
-:o: Текущий пользователь :warning: *не добавлено поле is_subscribed* :warning:  
-:o: Изменение пароля :interrobang: *код 401 - другое описание* :interrobang:  
-:heavy_check_mark: Получить токен авторизации  
-:o: Удаление токена авторизации :interrobang: *код 401 - другое описание* :interrobang:  
-</b></details>
-</b></details>
-<details>
-<summary> Теги </summary><br><b>
-:heavy_check_mark: /api/tags/  
-:o: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
-:o: Получение тега - *добавить валидатор на hex код (регулярное выражение)*  
-</b></details>
-</b></details>
-<details>
-<summary> Рецепты </summary><br><b>
-:x: Список рецептов:  
+### Пользователи
+    :heavy_check_mark: /api/users/  
+    :heavy_check_mark: /api/users/{id}/  
+    :heavy_check_mark: /api/users/me/  
+    :heavy_check_mark: /api/users/set_password/  
+    :heavy_check_mark: /api/auth/token/login/  
+    :heavy_check_mark: /api/auth/token/logout/  
+    :o: Список пользователей :warning: *не добавлено поле is_subscribed* :warning:  
+    :heavy_check_mark:  Регистрация пользователя  
+    :o: Профиль пользователя :warning: *не добавлено поле is_subscribed* :warning:  
+    :o: Текущий пользователь :warning: *не добавлено поле is_subscribed* :warning:  
+    :o: Изменение пароля :interrobang: *код 401 - другое описание* :interrobang:  
+    :heavy_check_mark: Получить токен авторизации  
+    :o: Удаление токена авторизации :interrobang: *код 401 - другое описание* :interrobang:  
+### Теги
+    :heavy_check_mark: /api/tags/  
+    :o: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
+    :o: Получение тега - *добавить валидатор на hex код (регулярное выражение)*  
+### Рецепты
+    :x: Список рецептов  
     :heavy_check_mark: api/recipes/  
     :x: список избранного  
     :x: список покупок  
@@ -35,33 +27,20 @@
     :heavy_check_mark: теги  
     :heavy_check_mark: игредниеты  
     :x: фото  
-</b></details>
-</b></details>
-<details>
-<summary> Список покупок </summary><br><b>
+### Список покупок 
 :x:
-</b></details>
-</b></details>
-<details>
-<summary> Избранное </summary><br><b>
+### Избранное
 :x:
-</b></details>
-</b></details>
-<details>
-<summary> Подписки </summary><br><b>
+### Подписки
 :heavy_check_mark: api/users/subscriptions/  
 :heavy_check_mark: api/users/{id}/subscribe/  
 :heavy_check_mark: Мои подписки
 :heavy_check_mark: Подписаться на пользователя:  
 :heavy_check_mark: Отписаться от пользователя  
-</b></details>
-</b></details>
-<details>
-<summary> Ингридиенты </summary><br><b>
+### Ингридиенты 
 :heavy_check_mark: /api/ingredients/  
 :heavy_check_mark: Список ингридиентов  
 :heavy_check_mark: Получение ингридиентов  
-</b></details>
 
 :x: паджинация  
 :x: фильтрация  
