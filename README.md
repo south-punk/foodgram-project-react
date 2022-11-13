@@ -32,7 +32,7 @@
 :heavy_check_mark: игредниеты  
 :x: список избранного  
 :x: список покупок  
-:heavy_check_mark: название
+:heavy_check_mark: название  
 :x: фото  
 :heavy_check_mark: описание  
 :heavy_check_mark: время приготовления  
@@ -41,12 +41,12 @@
 ### Избранное
 :heavy_check_mark: POST api/users/{id}/favorite/  
 :heavy_check_mark: DEL api/users/{id}/favorite/  
-:white_circle: Добавить рецепт в избранное  :warning: *Можно ли добавлять свои же рецепты в свое избранное?* :warning:
+:white_circle: Добавить рецепт в избранное  :warning: *Можно ли добавлять свои же рецепты в свое избранное?* :warning:  
 :heavy_check_mark: Удалить рецепт из избранного
 ### Подписки
 :heavy_check_mark: api/users/subscriptions/  
 :heavy_check_mark: api/users/{id}/subscribe/  
-:heavy_check_mark: Мои подписки
+:heavy_check_mark: Мои подписки  
 :heavy_check_mark: Подписаться на пользователя   
 :heavy_check_mark: Отписаться от пользователя  
 ### Ингридиенты
