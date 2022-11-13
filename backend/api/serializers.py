@@ -109,6 +109,19 @@ class RecipeListSerializer(serializers.ModelSerializer):
         return RecipeIngredientSerializer(ingredients, many=True).data
 
 
+class RecipeListSubscribeSerializer(serializers.ModelSerializer):
+    """Вывод рецептов в подписках пользователя."""
+
+    class Meta:
+        model = Recipe
+        fields = [
+            'id',
+            'name',
+            # 'image',
+            'cooking_time',
+        ]
+
+
 class RecipeCreateSerializer(serializers.ModelSerializer):
     """Сериализатор для создания/обновления/удаления рецепта(-ов)."""
 
@@ -156,7 +169,7 @@ class SubscribeListSerializer(serializers.ModelSerializer):
     """Сериализатор для получения подписок"""
 
     is_subscribed = serializers.SerializerMethodField()
-    recipes = serializers.SerializerMethodField()
+    recipes = RecipeListSubscribeSerializer(read_only=True, many=True)
     recipes_count = serializers.SerializerMethodField()
 
     class Meta:
@@ -178,11 +191,8 @@ class SubscribeListSerializer(serializers.ModelSerializer):
             return True
         return False
 
-    def get_recipes(self, obj):
-        pass
-
     def get_recipes_count(self, obj):
-        pass
+        return Recipe.objects.filter(author=obj).count()
 
 
 class SubscribeCreateDestroySerializer(serializers.ModelSerializer):

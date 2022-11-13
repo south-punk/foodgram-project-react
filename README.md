@@ -1,6 +1,8 @@
 # Foodgram, «Продуктовый помощник». Дипломный проект.
 ## Свой Чек-лист для проверки (по redoc):
-### Пользователи:
+</b></details>
+<details>
+<summary> Пользователи </summary><br><b>
 :heavy_check_mark: /api/users/  
 :heavy_check_mark: /api/users/{id}/  
 :heavy_check_mark: /api/users/me/  
@@ -14,13 +16,17 @@
 :o: Изменение пароля :interrobang: *код 401 - другое описание* :interrobang:  
 :heavy_check_mark: Получить токен авторизации  
 :o: Удаление токена авторизации :interrobang: *код 401 - другое описание* :interrobang:  
-
-### Теги
+</b></details>
+</b></details>
+<details>
+<summary> Теги </summary><br><b>
 :heavy_check_mark: /api/tags/  
 :o: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
 :o: Получение тега - *добавить валидатор на hex код (регулярное выражение)*  
-
-### Рецепты
+</b></details>
+</b></details>
+<details>
+<summary> Рецепты </summary><br><b>
 :x: Список рецептов:  
     :heavy_check_mark: api/recipes/  
     :x: список избранного  
@@ -29,21 +35,33 @@
     :heavy_check_mark: теги  
     :heavy_check_mark: игредниеты  
     :x: фото  
-### Список покупок
+</b></details>
+</b></details>
+<details>
+<summary> Список покупок </summary><br><b>
 :x:
-### Избранное
+</b></details>
+</b></details>
+<details>
+<summary> Избранное </summary><br><b>
 :x:
-### Подписки
+</b></details>
+</b></details>
+<details>
+<summary> Подписки </summary><br><b>
 :heavy_check_mark: api/users/subscriptions/  
 :heavy_check_mark: api/users/{id}/subscribe/  
-:o: Мои подписки :warning: *не добавлены поля recipes и recipes_count* :warning:  
-:o: Подписаться на пользователя :warning: *не добавлены поля recipes и recipes_count* :warning:  
+:heavy_check_mark: Мои подписки
+:heavy_check_mark: Подписаться на пользователя:  
 :heavy_check_mark: Отписаться от пользователя  
-### Ингридиенты
+</b></details>
+</b></details>
+<details>
+<summary> Ингридиенты </summary><br><b>
 :heavy_check_mark: /api/ingredients/  
 :heavy_check_mark: Список ингридиентов  
 :heavy_check_mark: Получение ингридиентов  
-
+</b></details>
 
 :x: паджинация  
 :x: фильтрация  
