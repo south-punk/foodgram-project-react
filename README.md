@@ -11,20 +11,20 @@
 :heavy_check_mark:  Регистрация пользователя  
 :heavy_check_mark: Профиль пользователя  
 :heavy_check_mark: Текущий пользователь  
-:heavy_check_mark: warning: Изменение пароля :interrobang: *код 401 - другое описание* :interrobang:  
+:heavy_check_mark: :warning: Изменение пароля :interrobang: *код 401 - другое описание* :interrobang:  
 :heavy_check_mark: Получить токен авторизации  
-:heavy_check_mark: warning: Удаление токена авторизации :interrobang: *код 401 - другое описание* :interrobang:  
+:heavy_check_mark: :warning: Удаление токена авторизации :interrobang: *код 401 - другое описание* :interrobang:  
 
 ### Теги
 :heavy_check_mark: /api/tags/  
-:heavy_check_mark: warning: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
-:heavy_check_mark: warning: Получение тега - *добавить валидатор на hex код (регулярное выражение)*  
+:heavy_check_mark: :warning: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
+:heavy_check_mark: :warning: Получение тега - *добавить валидатор на hex код (регулярное выражение)*  
 
 ### Рецепты
 :heavy_check_mark: GET api/recipes/  
 :heavy_check_mark: POST api/recipes/   
 :heavy_check_mark: GET api/recipes/{id}  
-:heavy_check_mark:  PATCH api/recipes/{id}  
+:heavy_check_mark: PATCH api/recipes/{id}  
 :heavy_check_mark: DEL api/recipes/{id}  
 
 :heavy_check_mark: теги  
