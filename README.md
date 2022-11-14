@@ -37,12 +37,12 @@
 :heavy_check_mark: описание  
 :heavy_check_mark: время приготовления  
 ### Список покупок
-:x: api/recipes/download_shopping_cart/
+:x: api/recipes/download_shopping_cart/  
 :heavy_check_mark: POST api/users/{id}/favorite/  
-:heavy_check_mark: DEL api/users/{id}/favorite/ 
-:x: Скачать список покупок
-:heavy_check_mark: Добавить рецепт в список покупок   
-:heavy_check_mark: Удалить рецепт из списка покупок
+:heavy_check_mark: DEL api/users/{id}/favorite/  
+:x: Скачать список покупок  
+:heavy_check_mark: Добавить рецепт в список покупок  
+:heavy_check_mark: Удалить рецепт из списка покупок  
 ### Избранное
 :heavy_check_mark: POST api/users/{id}/favorite/  
 :heavy_check_mark: DEL api/users/{id}/favorite/  
