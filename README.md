@@ -37,11 +37,16 @@
 :heavy_check_mark: описание  
 :heavy_check_mark: время приготовления  
 ### Список покупок
-:x:
+:x: api/recipes/download_shopping_cart/
+:heavy_check_mark: POST api/users/{id}/favorite/  
+:heavy_check_mark: DEL api/users/{id}/favorite/ 
+:x: Скачать список покупок
+:heavy_check_mark: Добавить рецепт в список покупок   
+:heavy_check_mark: Удалить рецепт из списка покупок
 ### Избранное
 :heavy_check_mark: POST api/users/{id}/favorite/  
 :heavy_check_mark: DEL api/users/{id}/favorite/  
-:white_circle: Добавить рецепт в избранное  :warning: *Можно ли добавлять свои же рецепты в свое избранное?* :warning:  
+:heavy_check_mark: Добавить рецепт в избранное    
 :heavy_check_mark: Удалить рецепт из избранного
 ### Подписки
 :heavy_check_mark: api/users/subscriptions/  
@@ -54,11 +59,11 @@
 :heavy_check_mark: Список ингридиентов  
 :heavy_check_mark: Получение ингридиентов  
 
-
 :x: паджинация  
 :x: фильтрация  
 :x: лимиты  
 :x: пермишны
+:x: валидация
 
 ## Чек-лист для проверки с Яндекса:
 ### Функциональность проекта

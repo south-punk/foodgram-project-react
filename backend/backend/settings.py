@@ -131,6 +131,7 @@ AUTH_USER_MODEL = 'users.User'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.AllowAny',
         # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
 
@@ -146,7 +147,8 @@ DJOSER = {
         'current_user': 'api.serializers.CustomUserSerializer',
     },
     'PERMISSIONS': {
-        'user': ['djoser.permissions.CurrentUserOrAdminOrReadOnly'],
+        'user': ['rest_framework.permissions.AllowAny'],
+        # 'user_list': ['djoser.permissions.CurrentUserOrAdminOrReadOnly'],
         'user_list': ['rest_framework.permissions.AllowAny'],
     },
     'HIDE_USERS': False,

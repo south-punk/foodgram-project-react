@@ -7,6 +7,7 @@ from recipes.models import (
     IngredientRecipe,
     Recipe,
     Subscription,
+    ShoppingCart,
     Tag,
     TagRecipe
 )
@@ -215,7 +216,7 @@ class SubscribeCreateDestroySerializer(serializers.ModelSerializer):
                                        context=self.context).data
 
 
-class FavoriteCreateDestroySerializer(serializers.ModelSerializer):
+class FavoriteSerializer(serializers.ModelSerializer):
     """Сериализатор для избранного."""
 
     class Meta:
@@ -226,6 +227,25 @@ class FavoriteCreateDestroySerializer(serializers.ModelSerializer):
                 queryset=Favorite.objects.all(),
                 fields=['user', 'recipe'],
                 message='Рецепт уже добавлен в список избранного'
+            )
+        ]
+
+    def to_representation(self, instance):
+        return RecipeListSubscribeSerializer(instance.recipe,
+                                             context=self.context).data
+
+
+class ShoppingCartSerializer(serializers.ModelSerializer):
+    """Сериализатор для списка покупок."""
+
+    class Meta:
+        model = ShoppingCart
+        fields = ['user', 'recipe']
+        validators = [
+            UniqueTogetherValidator(
+                queryset=ShoppingCart.objects.all(),
+                fields=['user', 'recipe'],
+                message='Рецепт уже добавлен в список покупок'
             )
         ]
 
