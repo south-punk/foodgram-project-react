@@ -1,5 +1,6 @@
 # Foodgram, «Продуктовый помощник». Дипломный проект.
 ## Свой Чек-лист для проверки (по redoc):
+
 ### Пользователи:
 :heavy_check_mark: /api/users/  
 :heavy_check_mark: /api/users/{id}/  
@@ -8,25 +9,24 @@
 :heavy_check_mark: /api/auth/token/login/  
 :heavy_check_mark: /api/auth/token/logout/  
 :heavy_check_mark: Список пользователей  
-:heavy_check_mark:  Регистрация пользователя  
+:heavy_check_mark: Регистрация пользователя  
 :heavy_check_mark: Профиль пользователя  
 :heavy_check_mark: Текущий пользователь  
-:heavy_check_mark: :warning: Изменение пароля :interrobang: *код 401 - другое описание* :interrobang:  
+:heavy_check_mark: Изменение пароля
 :heavy_check_mark: Получить токен авторизации  
-:heavy_check_mark: :warning: Удаление токена авторизации :interrobang: *код 401 - другое описание* :interrobang:  
+:heavy_check_mark: Удаление токена авторизации
 
-### Теги
+### Теги:
 :heavy_check_mark: /api/tags/  
 :heavy_check_mark: :warning: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
-:heavy_check_mark: :warning: Получение тега - *добавить валидатор на hex код (регулярное выражение)*  
+:heavy_check_mark: :warning: Получение тега - *добавить валидатор на hex код (регулярное выражение)*
 
-### Рецепты
+### Рецепты:
 :heavy_check_mark: GET api/recipes/  
 :heavy_check_mark: POST api/recipes/   
 :heavy_check_mark: GET api/recipes/{id}  
 :heavy_check_mark: PATCH api/recipes/{id}  
 :heavy_check_mark: DEL api/recipes/{id}  
-
 :heavy_check_mark: теги  
 :heavy_check_mark: автор  
 :heavy_check_mark: игредниеты  
@@ -35,35 +35,73 @@
 :heavy_check_mark: название  
 :x: фото  
 :heavy_check_mark: описание  
-:heavy_check_mark: время приготовления  
-### Список покупок
+:heavy_check_mark: время приготовления
+
+### Список покупок:
 :heavy_check_mark: api/recipes/download_shopping_cart/  
 :heavy_check_mark: POST api/users/{id}/favorite/  
 :heavy_check_mark: DEL api/users/{id}/favorite/  
-:heavy_check_mark: warning: Скачать список покупок :interrobang: *проверить с фронтендом* :interrobang:  
+:heavy_check_mark: :warning: Скачать список покупок :interrobang: *проверить с фронтендом* :interrobang:  
 :heavy_check_mark: Добавить рецепт в список покупок  
-:heavy_check_mark: Удалить рецепт из списка покупок  
-### Избранное
+:heavy_check_mark: Удалить рецепт из списка покупок
+
+### Избранное:
 :heavy_check_mark: POST api/users/{id}/favorite/  
 :heavy_check_mark: DEL api/users/{id}/favorite/  
 :heavy_check_mark: Добавить рецепт в избранное    
 :heavy_check_mark: Удалить рецепт из избранного
-### Подписки
+
+### Подписки:
 :heavy_check_mark: api/users/subscriptions/  
 :heavy_check_mark: api/users/{id}/subscribe/  
 :heavy_check_mark: Мои подписки  
 :heavy_check_mark: Подписаться на пользователя   
-:heavy_check_mark: Отписаться от пользователя  
-### Ингридиенты
+:heavy_check_mark: Отписаться от пользователя
+
+### Ингридиенты:
 :heavy_check_mark: /api/ingredients/  
 :heavy_check_mark: Список ингридиентов  
-:heavy_check_mark: Получение ингридиентов  
+:heavy_check_mark: Получение ингридиентов
 
-:x: паджинация  
-:x: фильтрация  
-:x: лимиты  
-:x: пермишны  
-:x: валидация  
+###  Пермишны:  
+#### Админ может: 
+:heavy_check_mark: изменять пароль любого пользователя  
+:heavy_check_mark: создавать/блокировать/удалять аккаунты пользователей  
+:heavy_check_mark: редактировать/удалять любые рецепты  
+:heavy_check_mark: добавлять/удалять/редактировать ингредиенты  
+:heavy_check_mark: добавлять/удалять/редактировать теги
+
+#### Авторизованный пользователь может
+:heavy_check_mark: Входить в систему под своим логином и паролем  
+:heavy_check_mark: Выходить из системы (разлогиниваться)  
+:heavy_check_mark: Менять свой пароль  
+:heavy_check_mark: Создавать/редактировать/удалять собственные рецепты  
+:heavy_check_mark: Просматривать рецепты на главной  
+:heavy_check_mark: Просматривать страницы пользователей  
+:heavy_check_mark: Просматривать отдельные страницы рецептов  
+:x: Фильтровать рецепты по тегам  
+:heavy_check_mark: Работать с персональным списком избранного: добавлять в него рецепты или удалять их, просматривать свою страницу избранных рецептов  
+:heavy_check_mark: Работать с персональным списком покупок: добавлять/удалять любые рецепты,  :warning: выгружать файл со количеством необходимых ингридиентов для рецептов из списка покупок *проверить с фронтендом* :warning:  
+:heavy_check_mark: Подписываться на публикации авторов рецептов и отменять подписку, просматривать свою страницу подписок
+
+#### Гость может: 
+:heavy_check_mark: Создать аккаунт  
+:heavy_check_mark: Просматривать рецепты на главной  
+:heavy_check_mark: Просматривать отдельные страницы рецептов  
+:heavy_check_mark: Просматривать страницы пользователей  
+:x: Фильтровать рецепты по тегам
+
+### Фильтрация 
+:x:  
+
+### Паджинация  
+:x:  
+
+### Лимиты
+:x:   
+
+### Валидация  
+:x:  
 
 ## Чек-лист для проверки с Яндекса:
 ### Функциональность проекта

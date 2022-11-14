@@ -13,7 +13,7 @@ class User(AbstractUser):
     first_name = models.TextField(max_length=150, verbose_name='Имя')
     last_name = models.TextField(max_length=150, verbose_name='Фамилия')
 
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     class Meta:
         verbose_name = 'Пользователи'

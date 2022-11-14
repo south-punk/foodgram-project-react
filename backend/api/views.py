@@ -26,6 +26,8 @@ from django.contrib.auth import get_user_model
 from django.db.models import Sum
 from rest_framework.decorators import action
 from django.http import HttpResponse
+from .permissions import AuthorOrAdmin, AdminOrReadOnly
+
 
 User = get_user_model()
 
@@ -35,6 +37,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     queryset = Recipe.objects.all()
     serializer_class = RecipeCreateSerializer
+    permission_classes = [AuthorOrAdmin]
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
@@ -64,18 +67,18 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
 
 class TagViewSet(viewsets.ModelViewSet):
-# class TagViewSet(viewsets.ReadOnlyModelViewSet):
     """ Представление тегов."""
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+    permission_classes = [AdminOrReadOnly]
 
 
 class IngredientViewSet(viewsets.ModelViewSet):
-# class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
     """ Представление ингредиентов."""
 
     serializer_class = IngredientSerializer
     queryset = Ingredient.objects.all()
+    permission_classes = [AdminOrReadOnly]
 
 
 class SubscribeListView(generics.ListAPIView):
