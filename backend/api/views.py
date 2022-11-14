@@ -12,6 +12,7 @@ from .serializers import (
 from recipes.models import (
     Favorite,
     Ingredient,
+    IngredientRecipe,
     Recipe,
     Subscription,
     ShoppingCart,
@@ -22,6 +23,9 @@ from rest_framework.response import Response
 from rest_framework import generics, status
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
+from django.db.models import Sum
+from rest_framework.decorators import action
+from django.http import HttpResponse
 
 User = get_user_model()
 
@@ -40,6 +44,24 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+    @action(detail=False, methods=['GET'])
+    def download_shopping_cart(self, request):
+        ingredients = IngredientRecipe.objects.filter(
+            recipe__shopping_cart__user=request.user
+        ).values(
+            'ingredient__name', 'ingredient__measurement_unit'
+            ).annotate(amount=Sum('amount'))
+        shopping_list = "Купить в магазине:"
+        for ingredient in ingredients:
+            shopping_list += (
+                f"\n{ingredient['ingredient__name']} "
+                f"({ingredient['ingredient__measurement_unit']}) - "
+                f"{ingredient['amount']}")
+        file = 'shopping_list.txt'
+        response = HttpResponse(shopping_list, content_type='text/plain')
+        response['Content-Disposition'] = f'attachment; filename="{file}.txt"'
+        return response
+
 
 class TagViewSet(viewsets.ModelViewSet):
 # class TagViewSet(viewsets.ReadOnlyModelViewSet):
@@ -57,7 +79,7 @@ class IngredientViewSet(viewsets.ModelViewSet):
 
 
 class SubscribeListView(generics.ListAPIView):
-    """ Отображение подписок. """
+    """Представление вывода подписок."""
 
     def get(self, request):
         user = request.user
@@ -71,6 +93,7 @@ class SubscribeListView(generics.ListAPIView):
 
 
 class SubscribeCreateDestroyView(APIView):
+    """Представление создания подписок."""
 
     def post(self, request, id):
         serializer = SubscribeCreateDestroySerializer(
@@ -97,6 +120,7 @@ class SubscribeCreateDestroyView(APIView):
 
 
 class FavoriteView(APIView):
+    """Представление избранного."""
 
     def post(self, request, id):
         serializer = FavoriteSerializer(
@@ -123,6 +147,7 @@ class FavoriteView(APIView):
 
 
 class ShoppingCartView(APIView):
+    """Представление списка покупок."""
 
     def post(self, request, id):
         serializer = ShoppingCartSerializer(

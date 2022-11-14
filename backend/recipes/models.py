@@ -8,7 +8,7 @@ User = get_user_model()
 
 
 class Ingredient(models.Model):
-    """ Модель ингредиентов для рецептов."""
+    """ Модель ингредиентов."""
 
     name = models.CharField(max_length=200,
                             verbose_name='Название ингридиента')
@@ -24,7 +24,7 @@ class Ingredient(models.Model):
 
 
 class Tag(models.Model):
-    """ Модель тэгов для рецептов."""
+    """ Модель тэгов."""
 
     name = models.CharField(max_length=200, verbose_name='Название тега')
     color = models.CharField(max_length=7, verbose_name='Цвет тега в HEX')
@@ -104,6 +104,7 @@ class IngredientRecipe(models.Model):
 
 
 class Subscription(models.Model):
+    """ Модель подписок."""
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -130,6 +131,7 @@ class Subscription(models.Model):
 
 
 class Favorite(models.Model):
+    """ Модель избранного."""
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -156,6 +158,7 @@ class Favorite(models.Model):
 
 
 class ShoppingCart(models.Model):
+    """ Модель списка покупок."""
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

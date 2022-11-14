@@ -154,3 +154,6 @@ DJOSER = {
     'HIDE_USERS': False,
     'LOGIN_FIELD': 'email'
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

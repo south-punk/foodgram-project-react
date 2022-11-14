@@ -7,40 +7,40 @@
 :heavy_check_mark: /api/users/set_password/  
 :heavy_check_mark: /api/auth/token/login/  
 :heavy_check_mark: /api/auth/token/logout/  
-:white_circle: Список пользователей :warning: *не добавлено поле is_subscribed* :warning:  
+:heavy_check_mark: Список пользователей  
 :heavy_check_mark:  Регистрация пользователя  
-:white_circle: Профиль пользователя :warning: *не добавлено поле is_subscribed* :warning:  
-:white_circle: Текущий пользователь :warning: *не добавлено поле is_subscribed* :warning:  
-:white_circle: Изменение пароля :interrobang: *код 401 - другое описание* :interrobang:  
+:heavy_check_mark: Профиль пользователя  
+:heavy_check_mark: Текущий пользователь  
+:heavy_check_mark: warning: Изменение пароля :interrobang: *код 401 - другое описание* :interrobang:  
 :heavy_check_mark: Получить токен авторизации  
-:white_circle: Удаление токена авторизации :interrobang: *код 401 - другое описание* :interrobang:  
+:heavy_check_mark: warning: Удаление токена авторизации :interrobang: *код 401 - другое описание* :interrobang:  
 
 ### Теги
 :heavy_check_mark: /api/tags/  
-:white_circle: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
-:white_circle: Получение тега - *добавить валидатор на hex код (регулярное выражение)*  
+:heavy_check_mark: warning: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
+:heavy_check_mark: warning: Получение тега - *добавить валидатор на hex код (регулярное выражение)*  
 
 ### Рецепты
 :heavy_check_mark: GET api/recipes/  
 :heavy_check_mark: POST api/recipes/   
 :heavy_check_mark: GET api/recipes/{id}  
-:x:  PATCH api/recipes/{id}  
+:heavy_check_mark:  PATCH api/recipes/{id}  
 :heavy_check_mark: DEL api/recipes/{id}  
 
 :heavy_check_mark: теги  
 :heavy_check_mark: автор  
 :heavy_check_mark: игредниеты  
-:x: список избранного  
-:x: список покупок  
+:heavy_check_mark: список избранного  
+:heavy_check_mark: список покупок  
 :heavy_check_mark: название  
 :x: фото  
 :heavy_check_mark: описание  
 :heavy_check_mark: время приготовления  
 ### Список покупок
-:x: api/recipes/download_shopping_cart/  
+:heavy_check_mark: api/recipes/download_shopping_cart/  
 :heavy_check_mark: POST api/users/{id}/favorite/  
 :heavy_check_mark: DEL api/users/{id}/favorite/  
-:x: Скачать список покупок  
+:heavy_check_mark: warning: Скачать список покупок :interrobang: *проверить с фронтендом* :interrobang:  
 :heavy_check_mark: Добавить рецепт в список покупок  
 :heavy_check_mark: Удалить рецепт из списка покупок  
 ### Избранное
