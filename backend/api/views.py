@@ -27,7 +27,9 @@ from django.db.models import Sum
 from rest_framework.decorators import action
 from django.http import HttpResponse
 from .permissions import AuthorOrAdmin, AdminOrReadOnly
-
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+from .filters import FilterRecipe
 
 User = get_user_model()
 
@@ -38,6 +40,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeCreateSerializer
     permission_classes = [AuthorOrAdmin]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = FilterRecipe
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
@@ -71,6 +75,7 @@ class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     permission_classes = [AdminOrReadOnly]
+    pagination_class = None
 
 
 class IngredientViewSet(viewsets.ModelViewSet):
@@ -79,6 +84,9 @@ class IngredientViewSet(viewsets.ModelViewSet):
     serializer_class = IngredientSerializer
     queryset = Ingredient.objects.all()
     permission_classes = [AdminOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
+    pagination_class = None
 
 
 class SubscribeListView(generics.ListAPIView):
@@ -87,12 +95,13 @@ class SubscribeListView(generics.ListAPIView):
     def get(self, request):
         user = request.user
         queryset = User.objects.filter(following__user=user)
+        page = self.paginate_queryset(queryset)
         serializer = SubscribeListSerializer(
-            queryset,
+            page,
             many=True,
             context={'request': request}
         )
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return self.get_paginated_response(serializer.data)
 
 
 class SubscribeCreateDestroyView(APIView):

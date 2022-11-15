@@ -65,6 +65,7 @@ class Recipe(models.Model):
         related_name='recipes',
         verbose_name='ингридиенты'
     )
+    pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
     """
     image = models.ImageField(
         upload_to='img/',  # настроить папку!
@@ -77,6 +78,7 @@ class Recipe(models.Model):
         return self.name
 
     class Meta():
+        ordering = ['pub_date']
         verbose_name = 'Рецепты'
         verbose_name_plural = 'Рецепты'
 
@@ -135,13 +137,13 @@ class Favorite(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='favotites',
+        related_name='favorites',
         verbose_name='Пользователь'
     )
     recipe = models.ForeignKey(
         Recipe,
         on_delete=models.CASCADE,
-        related_name='favotites',
+        related_name='favorites',
         verbose_name='Избранный рецепт'
     )
 
@@ -149,7 +151,7 @@ class Favorite(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'recipe'],
-                name='unique_user_recipe'
+                name='unique_user_recipe_favotites'
             )
         ]
 
@@ -176,7 +178,7 @@ class ShoppingCart(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'recipe'],
-                name='unique_user_recipe'
+                name='unique_user_recipe_shopping_cart'
             )
         ]
 
