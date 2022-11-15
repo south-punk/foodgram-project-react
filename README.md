@@ -18,8 +18,8 @@
 
 ### Теги:
 :heavy_check_mark: /api/tags/  
-:heavy_check_mark: :warning: Список тегов - *добавить валидатор на hex код (регулярное выражение)*  
-:heavy_check_mark: :warning: Получение тега - *добавить валидатор на hex код (регулярное выражение)*
+:heavy_check_mark: Список тегов  
+:heavy_check_mark: Получение тега
 
 ### Рецепты:
 :heavy_check_mark: GET api/recipes/  
@@ -106,7 +106,10 @@
 :heavy_check_mark: Валидация самоподписки  
 
 ### Админ-панель:
-:x:
+:heavy_check_mark: Пользователь  
+:heavy_check_mark: Рецепты  
+:heavy_check_mark: Теги  
+:heavy_check_mark: Ингридиенты  
 
 ## Чек-лист для проверки с Яндекса:
 ### Функциональность проекта

@@ -12,7 +12,6 @@ from recipes.models import (
     TagRecipe
 )
 from rest_framework.validators import UniqueTogetherValidator
-# from .validators import validate_required
 
 User = get_user_model()
 

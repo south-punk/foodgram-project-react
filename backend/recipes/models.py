@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, RegexValidator
 from django.contrib.auth import get_user_model
 
 MIN = 1
@@ -13,7 +13,9 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=200,
                             verbose_name='Название ингридиента')
     measurement_unit = models.CharField(max_length=200,
-                                        verbose_name='Единицы измерения')
+                                        verbose_name='Единицы измерения',
+                                        blank=True,
+                                        )
 
     def __str__(self):
         return self.name
@@ -27,7 +29,13 @@ class Tag(models.Model):
     """ Модель тэгов."""
 
     name = models.CharField(max_length=200, verbose_name='Название тега')
-    color = models.CharField(max_length=7, verbose_name='Цвет тега в HEX')
+    color = models.CharField(
+        max_length=7,
+        verbose_name='Цвет тега в HEX',
+        validators=[RegexValidator(
+            regex=r'^#([A-Fa-f0-9]{6})$',
+            message='Введите HEX-код цвета (Пример: #FFFAFA)')]
+    )
     slug = models.SlugField(max_length=200, unique=True,
                             verbose_name='Слаг тега')
 
