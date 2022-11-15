@@ -12,6 +12,7 @@ from recipes.models import (
     TagRecipe
 )
 from rest_framework.validators import UniqueTogetherValidator
+# from .validators import validate_required
 
 User = get_user_model()
 
@@ -170,6 +171,36 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['author']
 
+    def validate_ingredients(self, value):
+        """Валидация ингредиентов в рецепте."""
+        ingredients_list = []
+        if not value:
+            raise serializers.ValidationError('Ингредиенты не добавлены!')
+        for ingredient in value:
+            id = ingredient['id']
+            if not Ingredient.objects.filter(id=id).exists():
+                raise serializers.ValidationError(
+                    f'Ингридиента \'{id}\' нет в базе!'
+                    )
+            if id in ingredients_list:
+                raise serializers.ValidationError(
+                    f'Ингредиент \'{id}\' повторяется!'
+                    )
+            ingredients_list.append(id)
+        return value
+
+    def validate_tags(self, value):
+        """Валидация ингредиентов в рецепте."""
+        tags_list = []
+        if not value:
+            raise serializers.ValidationError('Теги не указаны!')
+        for tag in value:
+            id = tag.id
+            if id in tags_list:
+                raise serializers.ValidationError(f'Тег \'{id}\' повторяется!')
+            tags_list.append(id)
+        return value
+
     def create(self, validated_data):
         """Создание рецепта."""
 
@@ -253,6 +284,14 @@ class SubscribeCreateDestroySerializer(serializers.ModelSerializer):
                 message='Подписка уже существует!'
             )
         ]
+
+    def validate_author(self, value):
+        request = self.context['request']
+        if value == request.user:
+            raise serializers.ValidationError(
+                'Попытка подписки на самого себя'
+                )
+        return value
 
     def to_representation(self, instance):
         return SubscribeListSerializer(instance.author,
