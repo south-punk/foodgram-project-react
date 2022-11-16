@@ -26,7 +26,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Sum
 from rest_framework.decorators import action
 from django.http import HttpResponse
-from .permissions import AuthorOrAdmin, AdminOrReadOnly
+from .permissions import AuthorOrAdminOrReadOnly, AdminOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from .filters import FilterRecipe
@@ -39,7 +39,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     queryset = Recipe.objects.all()
     serializer_class = RecipeCreateSerializer
-    permission_classes = [AuthorOrAdmin]
+    permission_classes = [AuthorOrAdminOrReadOnly]
     filter_backends = [DjangoFilterBackend]
     filterset_class = FilterRecipe
 

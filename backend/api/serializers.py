@@ -12,8 +12,19 @@ from recipes.models import (
     TagRecipe
 )
 from rest_framework.validators import UniqueTogetherValidator
+import base64
+from django.core.files.base import ContentFile
 
 User = get_user_model()
+
+
+class Base64ImageField(serializers.ImageField):
+    def to_internal_value(self, data):
+        if isinstance(data, str) and data.startswith('data:image'):
+            format, imgstr = data.split(';base64,')
+            ext = format.split('/')[-1]
+            data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+        return super().to_internal_value(data)
 
 
 class CustomUserSerializer(UserSerializer):
@@ -155,8 +166,9 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
     ingredients = AmountIngredientInRecipeSerializer(many=True)
     tags = serializers.PrimaryKeyRelatedField(
         queryset=Tag.objects.all(),
-        many=True
+        many=True,
     )
+    image = Base64ImageField(required=True, allow_null=False)
 
     class Meta:
         model = Recipe
@@ -225,6 +237,8 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         tags = validated_data.pop('tags')
         instance.name = validated_data.pop('name')
         instance.text = validated_data.pop('text')
+        instance.image = validated_data.pop('image')
+        instance.cooking_time = validated_data.pop('cooking_time')
         for ingredient in ingredients:
             current_ingredient = Ingredient.objects.get(id=ingredient['id'])
             IngredientRecipe.objects.create(
@@ -234,6 +248,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
             )
         for tag in tags:
             TagRecipe.objects.create(recipe=instance, tag=tag)
+        instance.save()
         return instance
 
     def to_representation(self, recipe):
