@@ -74,13 +74,10 @@ class Recipe(models.Model):
         verbose_name='ингридиенты'
     )
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
-    """
     image = models.ImageField(
-        upload_to='img/',  # настроить папку!
-        null=True,
-        default=None
+        upload_to='recipes/images/',
+        verbose_name='Фото блюда'
         )
-    """
 
     def __str__(self):
         return self.name

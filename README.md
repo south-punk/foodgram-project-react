@@ -33,7 +33,7 @@
 :heavy_check_mark: список избранного  
 :heavy_check_mark: список покупок  
 :heavy_check_mark: название  
-:x: фото  
+:heavy_check_mark: фото  
 :heavy_check_mark: описание  
 :heavy_check_mark: время приготовления
 

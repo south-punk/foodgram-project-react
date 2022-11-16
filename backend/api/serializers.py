@@ -112,7 +112,7 @@ class RecipeListSerializer(serializers.ModelSerializer):
             'is_favorited',
             'is_in_shopping_cart',
             'name',
-            # 'image',
+            'image',
             'text',
             'cooking_time',
         ]
@@ -144,7 +144,7 @@ class RecipeListSubscribeSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'name',
-            # 'image',
+            'image',
             'cooking_time',
         ]
 
@@ -163,7 +163,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         fields = [
             'ingredients',
             'tags',
-            # 'image',
+            'image',
             'name',
             'text',
             'cooking_time',
