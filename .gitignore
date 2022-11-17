@@ -111,6 +111,8 @@ env.bak/
 venv.bak/
 .vscode
 vscode/
+media/
+static/
 
 # Spyder project settings
 .spyderproject
@@ -132,8 +134,3 @@ dmypy.json
 
 # .idea
 .idea
-
-# media & static folders
-
-media/
-static/

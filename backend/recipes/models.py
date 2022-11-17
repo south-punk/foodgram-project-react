@@ -65,7 +65,7 @@ class Recipe(models.Model):
         through='TagRecipe',
         related_name='recipes',
         verbose_name='теги'
-        )
+    )
 
     ingredients = models.ManyToManyField(
         Ingredient,
@@ -77,7 +77,7 @@ class Recipe(models.Model):
     image = models.ImageField(
         upload_to='recipes/images/',
         verbose_name='Фото блюда',
-        )
+    )
 
     def __str__(self):
         return self.name

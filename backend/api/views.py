@@ -27,9 +27,9 @@ from django.db.models import Sum
 from rest_framework.decorators import action
 from django.http import HttpResponse
 from .permissions import AuthorOrAdminOrReadOnly, AdminOrReadOnly
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters
-from .filters import FilterRecipe
+# from django_filters.rest_framework import DjangoFilterBackend
+from .filters import FilterRecipe, IngredientSearchFilter
+from django_filters import rest_framework as filters
 
 User = get_user_model()
 
@@ -38,9 +38,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
     """ Представление рецептов."""
 
     queryset = Recipe.objects.all()
-    serializer_class = RecipeCreateSerializer
     permission_classes = [AuthorOrAdminOrReadOnly]
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = FilterRecipe
 
     def get_serializer_class(self):
@@ -57,7 +56,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             recipe__shopping_cart__user=request.user
         ).values(
             'ingredient__name', 'ingredient__measurement_unit'
-            ).annotate(amount=Sum('amount'))
+        ).annotate(amount=Sum('amount'))
         shopping_list = "Купить в магазине:"
         for ingredient in ingredients:
             shopping_list += (
@@ -84,8 +83,8 @@ class IngredientViewSet(viewsets.ModelViewSet):
     serializer_class = IngredientSerializer
     queryset = Ingredient.objects.all()
     permission_classes = [AdminOrReadOnly]
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['name']
+    filter_backends = [IngredientSearchFilter]
+    search_fields = ['^name']
     pagination_class = None
 
 
@@ -112,7 +111,7 @@ class SubscribeCreateDestroyView(APIView):
             data={
                 'user': request.user.id,
                 'author': id
-                },
+            },
             context={'request': request}
         )
         if serializer.is_valid():
@@ -139,7 +138,7 @@ class FavoriteView(APIView):
             data={
                 'user': request.user.id,
                 'recipe': id
-                },
+            },
             context={'request': request}
         )
         if serializer.is_valid():
@@ -166,7 +165,7 @@ class ShoppingCartView(APIView):
             data={
                 'user': request.user.id,
                 'recipe': id
-                },
+            },
             context={'request': request}
         )
         if serializer.is_valid():
