@@ -1,4 +1,19 @@
 # Foodgram, «Продуктовый помощник». Дипломный проект.
+[![example workflow](https://github.com/south-punk/foodgram-project-react/actions/workflows/main.yml/badge.svg)](https://github.com/south-punk/foodgram-project-react/actions/workflows/main.yml)
+
+[![Python](https://img.shields.io/badge/Python-blue?logo=Python&logoColor=white)](https://www.python.org/)
+[![GitHub](https://img.shields.io/badge/GitHub-blue?logo=GitHub&logoColor=white)](https://github.com/)
+[![GitHub%20Actions](https://img.shields.io/badge/GitHub%20Actions-blue?logo=GitHub%20Actions&logoColor=white)](https://github.com/features/actions)
+[![Django](https://img.shields.io/badge/Django-blue?logo=Django&logoColor=white)](https://www.djangoproject.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-blue?logo=PostgreSQL&logoColor=white)](https://www.postgresql.org/)
+[![NGINX](https://img.shields.io/badge/NGINX-blue?logo=NGINX&logoColor=white)](https://nginx.org/ru/)
+[![gunicorn](https://img.shields.io/badge/gunicorn-blue?logo=gunicorn&logoColor=white)](https://gunicorn.org/)
+[![Docker](https://img.shields.io/badge/Docker-blue?logo=Docker&logoColor=white)](https://www.docker.com/)
+[![Yandex.Cloud](https://img.shields.io/badge/Yandex.Cloud-blue?logo=Yandex.Cloud&logoColor=white)](https://cloud.yandex.ru/)
+
+##  Описание
+ сайт Foodgram («Продуктовый помощник») - онлайн-сервис на котором можно публиковать рецепты, подписываться на публикации других пользователей, добавлять понравившиеся рецепты в список «Избранное», а перед походом в магазин скачивать сводный список продуктов, необходимых для приготовления одного или нескольких выбранных блюд.
+ 
 ## Свой Чек-лист для проверки (по redoc):
 
 ### Пользователи:
