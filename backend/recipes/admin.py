@@ -1,12 +1,8 @@
 from django.contrib import admin
-from .models import (
-    Ingredient,
-    IngredientRecipe,
-    Recipe,
-    Tag,
-    TagRecipe,
-    Favorite
-)
+
+from .models import (Favorite, Ingredient, IngredientRecipe,
+                     Recipe, Tag, TagRecipe)
+
 
 EMPTY = '-пусто-'
 

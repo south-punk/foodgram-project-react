@@ -13,5 +13,4 @@ class AdminOrReadOnly(permissions.BasePermission):
         if request.user.is_authenticated:
             return (request.user.is_staff
                     or request.method in permissions.SAFE_METHODS)
-        else:
-            return request.method in permissions.SAFE_METHODS
+        return request.method in permissions.SAFE_METHODS
