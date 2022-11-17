@@ -15,7 +15,7 @@
 :heavy_check_mark: Изменение пароля  
 :heavy_check_mark: Получить токен авторизации  
 :heavy_check_mark: Удаление токена авторизации
- 
+
 ### Теги:
 :heavy_check_mark: /api/tags/  
 :heavy_check_mark: Список тегов  
