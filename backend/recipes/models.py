@@ -1,14 +1,17 @@
+"""Модуль описания моделей проекта."""
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 
-MIN = 1
+from .colors import COLOR_CHOICES
+
+MIN_TIME_OR_COUNT = 1
 
 User = get_user_model()
 
 
 class Ingredient(models.Model):
-    """ Модель ингредиентов."""
+    """Модель ингредиентов."""
 
     name = models.CharField(max_length=200,
                             verbose_name='Название ингридиента')
@@ -18,20 +21,24 @@ class Ingredient(models.Model):
                                         )
 
     def __str__(self):
+        """Метод представления объектов."""
         return self.name
 
     class Meta():
+        """Внутренний класс конфигурации модели."""
+
         verbose_name = 'Ингридиенты'
         verbose_name_plural = 'Ингридиенты'
 
 
 class Tag(models.Model):
-    """ Модель тэгов."""
+    """Модель тэгов."""
 
     name = models.CharField(max_length=200, verbose_name='Название тега')
     color = models.CharField(
         max_length=7,
         verbose_name='Цвет тега в HEX',
+        choices=COLOR_CHOICES,
         validators=[RegexValidator(
             regex=r'^#([A-Fa-f0-9]{6})$',
             message='Введите HEX-код цвета (Пример: #FFFAFA)')]
@@ -40,15 +47,19 @@ class Tag(models.Model):
                             verbose_name='Слаг тега')
 
     def __str__(self):
+        """Метод представления объектов."""
         return self.name
 
     class Meta():
+        """Внутренний класс конфигурации модели."""
+
         verbose_name = 'Теги'
         verbose_name_plural = 'Теги'
 
 
 class Recipe(models.Model):
-    """ Модель рецептов."""
+    """Модель рецептов."""
+
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -58,7 +69,7 @@ class Recipe(models.Model):
     name = models.CharField(max_length=200, verbose_name='Название')
     text = models.TextField(verbose_name='Описание')
     cooking_time = models.IntegerField(
-        validators=[MinValueValidator(MIN)],
+        validators=[MinValueValidator(MIN_TIME_OR_COUNT)],
         verbose_name='Время приготовления')
     tags = models.ManyToManyField(
         Tag,
@@ -80,38 +91,46 @@ class Recipe(models.Model):
     )
 
     def __str__(self):
+        """Метод представления объектов."""
         return self.name
 
     class Meta():
+        """Внутренний класс конфигурации модели."""
+
         ordering = ['-pub_date']
         verbose_name = 'Рецепты'
         verbose_name_plural = 'Рецепты'
 
 
 class TagRecipe(models.Model):
-    """ Модель связи рецепта и тега."""
+    """Модель связи рецепта и тега."""
 
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
     def __str__(self):
+        """Метод представления объектов."""
         return f'{self.tag} - {self.recipe}'
 
 
 class IngredientRecipe(models.Model):
-    """ Модель связи рецепта и ингридиента с количеством."""
+    """Модель связи рецепта и ингридиента с количеством."""
 
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    amount = models.IntegerField(validators=[MinValueValidator(MIN)],
-                                 verbose_name='Количество')
+    amount = models.IntegerField(
+        validators=[MinValueValidator(MIN_TIME_OR_COUNT)],
+        verbose_name='Количество'
+    )
 
     def __str__(self):
+        """Метод представления объектов."""
         return f'{self.recipe} - {self.ingredient} {self.amount}'
 
 
 class Subscription(models.Model):
-    """ Модель подписок."""
+    """Модель подписок."""
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -126,6 +145,8 @@ class Subscription(models.Model):
     )
 
     class Meta:
+        """Внутренний класс конфигурации модели."""
+
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'author'],
@@ -134,11 +155,13 @@ class Subscription(models.Model):
         ]
 
     def __str__(self):
+        """Метод представления объектов."""
         return f'подписка пользователя {self.user} на {self.author}'
 
 
 class Favorite(models.Model):
-    """ Модель избранного."""
+    """Модель избранного."""
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -153,6 +176,8 @@ class Favorite(models.Model):
     )
 
     class Meta:
+        """Внутренний класс конфигурации модели."""
+
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'recipe'],
@@ -161,11 +186,13 @@ class Favorite(models.Model):
         ]
 
     def __str__(self):
+        """Метод представления объектов."""
         return f'{self.recipe} добавлен в избранное пользователя {self.user}'
 
 
 class ShoppingCart(models.Model):
-    """ Модель списка покупок."""
+    """Модель списка покупок."""
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -180,6 +207,8 @@ class ShoppingCart(models.Model):
     )
 
     class Meta:
+        """Внутренний класс конфигурации модели."""
+
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'recipe'],
@@ -188,5 +217,6 @@ class ShoppingCart(models.Model):
         ]
 
     def __str__(self):
+        """Метод представления объектов."""
         return (f'{self.recipe} добавлен в список'
                 f'покупок пользователя {self.user}')

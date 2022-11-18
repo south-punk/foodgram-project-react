@@ -1,30 +1,24 @@
-import base64
-
+"""Модуль сериализаторов."""
 from django.contrib.auth import get_user_model
-from django.core.files.base import ContentFile
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from recipes.models import (Favorite, Ingredient, IngredientRecipe, Recipe,
                             ShoppingCart, Subscription, Tag, TagRecipe)
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 
+from .fields import Base64ImageField
+
 User = get_user_model()
-
-
-class Base64ImageField(serializers.ImageField):
-    def to_internal_value(self, data):
-        if isinstance(data, str) and data.startswith('data:image'):
-            format, imgstr = data.split(';base64,')
-            ext = format.split('/')[-1]
-            data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
-        return super().to_internal_value(data)
 
 
 class CustomUserSerializer(UserSerializer):
     """Сериализатор пользователя/ей."""
+
     is_subscribed = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = User
         fields = [
             'email',
@@ -36,6 +30,7 @@ class CustomUserSerializer(UserSerializer):
         ]
 
     def get_is_subscribed(self, obj):
+        """Метод обработки данных для получения значения поля подиски."""
         request = self.context['request']
         if request.user.is_anonymous:
             return False
@@ -47,6 +42,8 @@ class CustomUserCreateSerializer(UserCreateSerializer):
     """Сериализатор создания пользователя."""
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = User
         fields = [
             'email',
@@ -61,6 +58,8 @@ class TagSerializer(serializers.ModelSerializer):
     """Сериализатор для тегов."""
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = Tag
         fields = ['id', 'name', 'color', 'slug']
 
@@ -69,6 +68,8 @@ class IngredientSerializer(serializers.ModelSerializer):
     """Сериализатор для Ингредиентов."""
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = Ingredient
         fields = ['id', 'name', 'measurement_unit']
 
@@ -83,6 +84,8 @@ class RecipeIngredientSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = IngredientRecipe
         fields = ['id', 'name', 'amount', 'measurement_unit']
 
@@ -93,6 +96,8 @@ class AmountIngredientInRecipeSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = IngredientRecipe
         fields = ['id', 'amount']
 
@@ -107,6 +112,8 @@ class RecipeListSerializer(serializers.ModelSerializer):
     is_in_shopping_cart = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = Recipe
         fields = [
             'id',
@@ -122,10 +129,12 @@ class RecipeListSerializer(serializers.ModelSerializer):
         ]
 
     def get_ingredients(self, obj):
+        """Метод обработки данных для получения значения поля ингредиентов."""
         ingredients = IngredientRecipe.objects.filter(recipe=obj)
         return RecipeIngredientSerializer(ingredients, many=True).data
 
     def get_is_favorited(self, obj):
+        """Метод обработки данных для получения значения поля избранного."""
         request = self.context['request']
         if request.user.is_anonymous:
             return False
@@ -133,6 +142,8 @@ class RecipeListSerializer(serializers.ModelSerializer):
             user=request.user, recipe=obj).exists()
 
     def get_is_in_shopping_cart(self, obj):
+        """Метод обработки данных для."""
+        """получения значения поля списка покупок"""
         request = self.context['request']
         if request.user.is_anonymous:
             return False
@@ -144,6 +155,8 @@ class RecipeListSubscribeSerializer(serializers.ModelSerializer):
     """Вывод рецептов в подписках пользователя."""
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = Recipe
         fields = [
             'id',
@@ -164,6 +177,8 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
     image = Base64ImageField(required=True, allow_null=False)
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = Recipe
         fields = [
             'ingredients',
@@ -194,7 +209,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         return value
 
     def validate_tags(self, value):
-        """Валидация ингредиентов в рецепте."""
+        """Валидация тегов в рецепте."""
         tags_list = []
         if not value:
             raise serializers.ValidationError('Теги не указаны!')
@@ -207,7 +222,6 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """Создание рецепта."""
-
         ingredients = validated_data.pop('ingredients')
         tags = validated_data.pop('tags')
         recipe = Recipe.objects.create(**validated_data)
@@ -245,6 +259,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         return instance
 
     def to_representation(self, recipe):
+        """Переопределение для чтения сериализованных данных."""
         return RecipeListSerializer(recipe, context=self.context).data
 
 
@@ -256,6 +271,8 @@ class SubscribeListSerializer(serializers.ModelSerializer):
     recipes_count = serializers.SerializerMethodField()
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = User
         fields = [
             'id',
@@ -269,12 +286,18 @@ class SubscribeListSerializer(serializers.ModelSerializer):
         ]
 
     def get_is_subscribed(self, obj):
+        """Метод обработки данных для получения значения поля подиски."""
         request = self.context['request']
         if Subscription.objects.filter(user=request.user, author=obj).exists():
             return True
         return False
 
     def get_recipes(self, obj):
+        """
+        Метод обработки данных для получения.
+
+        значения поля рецептов пользователя
+        """
         request = self.context['request']
         if request.user.is_anonymous:
             return False
@@ -286,6 +309,11 @@ class SubscribeListSerializer(serializers.ModelSerializer):
             recipes, many=True, context=self.context).data
 
     def get_recipes_count(self, obj):
+        """
+        Метод обработки данных для получения значения.
+
+        поля количества рецептов пользователя
+        """
         return Recipe.objects.filter(author=obj).count()
 
 
@@ -293,6 +321,8 @@ class SubscribeCreateDestroySerializer(serializers.ModelSerializer):
     """Сериализатор для создания/удаления подписки."""
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = Subscription
         fields = ['user', 'author']
         validators = [
@@ -304,6 +334,7 @@ class SubscribeCreateDestroySerializer(serializers.ModelSerializer):
         ]
 
     def validate_author(self, value):
+        """Валидация для поля автор."""
         request = self.context['request']
         if value == request.user:
             raise serializers.ValidationError(
@@ -312,6 +343,7 @@ class SubscribeCreateDestroySerializer(serializers.ModelSerializer):
         return value
 
     def to_representation(self, instance):
+        """Переопределение для чтения сериализованных данных."""
         return SubscribeListSerializer(instance.author,
                                        context=self.context).data
 
@@ -320,10 +352,13 @@ class FavoriteSerializer(serializers.ModelSerializer):
     """Сериализатор для избраных рецептов."""
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = Favorite
         fields = ['user', 'recipe']
 
     def to_representation(self, instance):
+        """Переопределение для чтения сериализованных данных."""
         return RecipeListSubscribeSerializer(instance.recipe,
                                              context=self.context).data
 
@@ -332,6 +367,8 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
     """Сериализатор для списка покупок."""
 
     class Meta:
+        """Внутренний класс для определения модели и полей сериализации."""
+
         model = ShoppingCart
         fields = ['user', 'recipe']
         validators = [
@@ -343,5 +380,6 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
         ]
 
     def to_representation(self, instance):
+        """Переопределение для чтения сериализованных данных."""
         return RecipeListSubscribeSerializer(instance.recipe,
                                              context=self.context).data
