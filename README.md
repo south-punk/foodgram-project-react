@@ -30,12 +30,9 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 - ***Скопировать файлы main.yaml и nginx.conf на сервер c локальной машины:**
-перейти в директорию с файлом **main.yaml**
+перейти в директорию с файлом **docker-compose.yaml** и **nginx.conf** и выполнить команды:
 ```bash
-scp main.yaml <username>@<host>:home/<username>/
-```
-перейти в директорию с файлом **nginx.conf**
-```bash
+scp docker-compose.yaml <username>@<host>:home/<username>/
 scp nginx.conf <username>@<host>:home/<username>/
 ```
 - **Добавить в Secrets GitHub Actions переменные окружения:**  
