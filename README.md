@@ -32,13 +32,13 @@ sudo chmod +x /usr/local/bin/docker-compose
 - ***Скопировать файлы main.yaml и nginx.conf на сервер c локальной машины:**
 перейти в директорию с файлом **main.yaml**
 ```bash
-scp docker-compose.yaml <username>@<host>:home/<username>/
+scp main.yaml <username>@<host>:home/<username>/
 ```
 перейти в директорию с файлом **nginx.conf**
 ```bash
-scp default.conf <username>@<host>:home/<username>/
+scp nginx.conf <username>@<host>:home/<username>/
 ```
-- **Добавить в Secrets GitHub Actions переменные окружения:**
+- **Добавить в Secrets GitHub Actions переменные окружения:**  
     - **SECRET_KEY** - секретный ключ для файла настроек Django
     - **ALLOWED_HOSTS** - список доступных адресов проекта
     - **SSH_KEY** - ssh private key для доступа к удаленному серверу
@@ -78,7 +78,7 @@ sudo docker-compose exec backend python manage.py collectstatic --no-input
 sudo docker-compose exec backend python manage.py loadtodb
 ```
 
-**IP cесрвиса** -  [84.201.141.74](http://84.201.141.74) или [bigfood.sytes.net](http://bigfood.sytes.net)  
+**Сервис доступен по адресам** -  [84.201.141.74](http://84.201.141.74) или [bigfood.sytes.net](http://bigfood.sytes.net)  
 **Документация API с примерами** - [84.252.143.100/redoc/](http://84.252.143.100/api/docs/redoc.html) или [bigfood.sytes.net/api/docs/redoc.html](http://bigfood.sytes.net/api/docs/redoc.html)  
 
 ## Свой Чек-лист для проверки (по redoc):
