@@ -2,7 +2,6 @@ version: '3.3'
 services:
 
   frontend:
-    #  build: ../frontend
     image: southpunk/frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
@@ -16,7 +15,6 @@ services:
       - ./.env
 
   backend:
-    # build: ../backend
     image: southpunk/backend:latest
     restart: always
     volumes:
