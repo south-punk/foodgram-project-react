@@ -36,6 +36,8 @@ scp docker-compose.yaml <username>@<host>:home/<username>/
 scp nginx.conf <username>@<host>:home/<username>/
 ```
 - **Добавить в Secrets GitHub Actions переменные окружения:**  
+    - **DEBUG** - Вкл./выкл. режима отладки в настройках Django
+    - **CORS_ALLOWED_ORIGINS** - список адресов, с которых разрешены запросы
     - **SECRET_KEY** - секретный ключ для файла настроек Django
     - **ALLOWED_HOSTS** - список доступных адресов проекта
     - **SSH_KEY** - ssh private key для доступа к удаленному серверу
@@ -75,8 +77,8 @@ sudo docker-compose exec backend python manage.py collectstatic --no-input
 sudo docker-compose exec backend python manage.py loadtodb
 ```
 
-**Сервис доступен по адресам** -  [84.201.141.74](http://84.201.141.74) или [bigfood.sytes.net](http://bigfood.sytes.net)  
-**Документация API с примерами** - [84.252.143.100/redoc/](http://84.252.143.100/api/docs/redoc.html) или [bigfood.sytes.net/api/docs/redoc.html](http://bigfood.sytes.net/api/docs/redoc.html)  
+**Сервис доступен по адресам** -  [51.250.97.178](http://51.250.97.178) или [bigfood.sytes.net](http://bigfood.sytes.net)  
+**Документация API с примерами** - [51.250.97.178/redoc/](http://51.250.97.178/api/docs/redoc.html) или [bigfood.sytes.net/api/docs/redoc.html](http://bigfood.sytes.net/api/docs/redoc.html)  
 
 ## Свой Чек-лист для проверки (по redoc):
 
