@@ -3,9 +3,18 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 
-from .colors import COLOR_CHOICES
-
 MIN_TIME_OR_COUNT = 1
+COLOR_CHOICES = (
+    ('#32CD32', 'LimeGreen'),
+    ('#FFA500', 'Orange'),
+    ('#9370DB', 'MediumPurple	'),
+    ('#FFFF00', 'Yellow'),
+    ('#EE82EE', 'Violet'),
+    ('#FF6347', 'Tomato'),
+    ('#F4A460', 'SandyBrown	'),
+    ('#4682B4', 'SteelBlue')
+)
+
 
 User = get_user_model()
 
