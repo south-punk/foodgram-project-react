@@ -77,5 +77,7 @@ sudo docker-compose exec backend python manage.py collectstatic --no-input
 sudo docker-compose exec backend python manage.py loadtodb
 ```
 
-**Сервис доступен по адресам** -  [51.250.97.178](http://51.250.97.178) или [bigfood.sytes.net](http://bigfood.sytes.net)  
-**Документация API с примерами** - [51.250.97.178/api/docs/](http://51.250.97.178/api/docs/) или [bigfood.sytes.net/api/docs/](http://bigfood.sytes.net/api/docs/redoc.html)  
+**Сервис доступен по адресам**:  [51.250.97.178](http://51.250.97.178) или [bigfood.sytes.net](http://bigfood.sytes.net)  
+**Документация API с примерами**: [51.250.97.178/api/docs/](http://51.250.97.178/api/docs/) или [bigfood.sytes.net/api/docs/](http://bigfood.sytes.net/api/docs/redoc.html)  
+**Админ-панель**:  [51.250.97.178/admin](http://51.250.97.178/admin) или [bigfood.sytes.net/admin](http://bigfood.sytes.net/admin)  
+**Login & password**: andy
